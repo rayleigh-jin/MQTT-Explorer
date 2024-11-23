@@ -34,11 +34,11 @@ app.whenReady().then(() => {
   backendRpc.on(getAppVersion, async () => app.getVersion())
 
   backendRpc.on(writeToFile, async ({ filePath, data, encoding }) => {
-    await fsPromise.writeFile(filePath, Buffer.from(data, 'base64'), { encoding })
+    await fsPromise.writeFile(filePath, Buffer.from(data, 'base64'), { encoding: encoding as BufferEncoding | null })
   })
 
   backendRpc.on(readFromFile, async ({ filePath, encoding }) => {
-    return fsPromise.readFile(filePath, { encoding })
+    return fsPromise.readFile(filePath, { encoding: encoding as BufferEncoding | null })
   })
 })
 
